@@ -12,10 +12,8 @@ jobs:
         run: |
           pip install -r requirements.txt
           dvc repro 
-
           git fetch --prune ## https://git-scm.com/docs/git-fetch
           dvc metrics diff --show-md main > report.md
-
           echo "## Validating results by region" >> report.md
           echo "![](./by_region.png)" >> report.md
           cml comment create report.md
