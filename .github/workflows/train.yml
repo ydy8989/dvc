@@ -13,7 +13,6 @@ jobs:
           pip install -r requirements.txt
           dvc push
           dvc repro 
-          
           git fetch --prune ## https://git-scm.com/docs/git-fetch
           dvc metrics diff --show-md main > report.md
           echo "## Validating results by region" >> report.md
