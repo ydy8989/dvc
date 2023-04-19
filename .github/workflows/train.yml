@@ -11,9 +11,11 @@ jobs:
           repo_token: ${{ secrets.MY_GITHUB_TOKEN }}
         run: |
           pip install -r requirements.txt
+          dvc push
           dvc repro 
+          
           git fetch --prune ## https://git-scm.com/docs/git-fetch
           dvc metrics diff --show-md main > report.md
           echo "## Validating results by region" >> report.md
-          echo "![](./by_region.png)" >> report.md
-          cml comment create report.md
+          cml-publish by_region.png --md >> report.md
+          cml-send-comment report.md
